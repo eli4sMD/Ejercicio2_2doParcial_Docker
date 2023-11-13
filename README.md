@@ -21,6 +21,8 @@ Cada uno de estos servicios se crea a partir de **imágenes Docker personalizada
 - Clonar este repositorio
 
 **Pasos para el Despliegue(los siguientes comandos se pueden ejecutar desde la carpeta raiz del proyecto):**
+>
+**Se recomienda ejecutar el comando "npm i" en las carpetas "app-cliente", "rest-service" y "soap-service"**
 
 1. **Inicializar Docker Swarm:**
    ```bash
