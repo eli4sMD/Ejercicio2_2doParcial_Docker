@@ -1,3 +1,5 @@
+## SWARM CON SERVICIOS SOAP Y REST
+
 **Despliegue de Servicios en Docker Swarm con Enfoque Práctico**
 
 **Descripción del Proyecto:**
@@ -14,51 +16,28 @@ Este proyecto se centra en implementar el despliegue de cuatro servicios como pa
 
 Cada uno de estos servicios se crea a partir de **imágenes Docker personalizadas**, las cuales se construyen utilizando archivos **Dockerfile** específicos para cada servicio.
 
-**Requerimientos:**
+## PASO 1 Crear las imagenes (debera ingresar en las respectivas carpetas)
 
-- Docker Desktop
-- Entorno Node.js
-- Clonar este repositorio
+## en apiRest
+`docker build . -t restapi`
+## en apiSoap
+`docker build . -t soapapi`
+## en client
+`docker build . -t client`
+## en mysql
+`docker build . -t mysql-image`
 
-**Pasos para el Despliegue(los siguientes comandos se pueden ejecutar desde la carpeta raiz del proyecto):**
->
-**Se recomienda ejecutar el comando "npm i" en las carpetas "app-cliente", "rest-service" y "soap-service"**
+## PASO 2 Desplegar los servicios con swarm(en carpeta raiz)
 
-1. **Inicializar Docker Swarm:**
-   ```bash
-   docker swarm init
-   ```
+`docker swarm init`
 
-2. **Construir Imágenes:**
-   - MySQL:
-     ```bash
-     docker build -t mysql:img ./imagenMysql/
-     ```
-   - Servicio Web SOAP:
-     ```bash
-     docker build -t soap:ws ./soap-service/
-     ```
-   - REST API:
-     ```bash
-     docker build -t rest:ws ./rest-service/
-     ```
-   - Aplicación Cliente:
-     ```bash
-     docker build -t cliente:web ./app-cliente/
-     ```
+`docker stack deploy -c docker-compose.yml app`
 
-3. **Desplegar Stack en Docker Swarm:**
-   ```bash
-   docker stack deploy -c docker-stack-compose.yml app
-   ```
+## Aclaraciones
 
-4. **Verificar Servicios:**
-   ```bash
-   docker service ls
-   ```
+Se creo el servidor SOAP en el puerto 4000
 
-5. **Realizar Pruebas:**
-   Abrir un navegador y acceder a: "http://localhost:3000"
+El servidor web se encuentra alojado en localhost:8080
 
 **Desmontar y Limpiar:**
 
@@ -71,7 +50,3 @@ Cada uno de estos servicios se crea a partir de **imágenes Docker personalizada
    ```bash
    docker rmi cliente:web rest:ws soap:ws mysql:img
    ```
-
-**Nota:**
-- Puedes ejecutar los comandos desde el paso 2 tantas veces como desees sin problemas.
-- Este enfoque práctico facilita la creación, despliegue y limpieza de servicios en un entorno Docker Swarm.

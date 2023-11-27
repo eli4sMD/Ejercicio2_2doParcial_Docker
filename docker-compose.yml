@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql-image
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+        - mynetwork
+    deploy:
+      replicas: 1 
+
+  service-nodejs:
+    image: restapi
+    ports:
+      - "5050:3000"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 1 
+
+  service-soap:
+    image: soapapi
+    ports:
+      - "4000:4000"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 1
+
+  service-client:
+    image: client
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 4 
+  
+  
+
+networks:
+  mynetwork:
